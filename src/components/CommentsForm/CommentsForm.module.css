@@ -44,6 +44,13 @@
 	box-shadow: 0 0 0 0.2rem rgba(23, 162, 184, 0.5);
 }
 
+.buttonAdd:disabled {
+	background-color: #ccc;
+	border-color: #ccc;
+	cursor: not-allowed;
+	opacity: 0.6;
+}
+
 .InputColor {
 	display: block;
 	max-width: 71px;

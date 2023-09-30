@@ -6,17 +6,24 @@ import { CommentType } from './types/CommentType';
 import Comments from './components/Comments/Comments';
 
 const App: React.FC = () => {
-	const [comments, setComments] = useState<CommentType[]>([]);
-
 	const storedItems = localStorage.getItem('items');
-	const initialItems = storedItems ? JSON.parse(storedItems) : [];
-	const [todos, setTodos] = useState<NewItemType[]>(initialItems);
+	const storedActiveItem = localStorage.getItem('activeItem');
+	const storedComments = localStorage.getItem('comments');
 
-	const [toggleState, setToggleState] = useState('');
+	const initialItems = storedItems ? JSON.parse(storedItems) : [];
+	const initialActiveItem = storedActiveItem ? JSON.parse(storedActiveItem) : '';
+	const initialComments = storedComments ? JSON.parse(storedComments) : [];
+
+	const [todos, setTodos] = useState<NewItemType[]>(initialItems);
+	const [comments, setComments] = useState<CommentType[]>(initialComments);
+	const [toggleState, setToggleState] = useState<string>(initialActiveItem);
 
 	useEffect(() => {
 		localStorage.setItem('items', JSON.stringify(todos));
-	}, [todos]);
+		localStorage.setItem('activeItem', JSON.stringify(toggleState));
+		localStorage.setItem('comments', JSON.stringify(comments));
+		todos.length === 0 && setToggleState('');
+	}, [comments, todos, toggleState]);
 
 	const addTask = (textInput: string) => {
 		if (textInput.trim() !== '') {
@@ -48,9 +55,14 @@ const App: React.FC = () => {
 		setToggleState(id);
 	};
 
-	const removeTask = (id: string) => {
-		const filterItem = [...todos.filter((item) => item.id !== id)];
+	const removeTask = async (event: React.MouseEvent<HTMLButtonElement>, id: string) => {
+		event.stopPropagation();
+		const filterItem = todos.filter((item) => item.id !== id);
+		const filterComment = comments.filter((item) => item.id !== id);
+
 		setTodos(filterItem);
+		setComments(filterComment);
+		filterItem.length && setToggleState(filterItem[0].id);
 	};
 
 	return (

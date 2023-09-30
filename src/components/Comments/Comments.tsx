@@ -19,7 +19,10 @@ const Comments: React.FC<CommentsType> = ({ comments, addComment, toggleState })
 					/>
 				))}
 			</ul>
-			<CommentsForm addComment={addComment} />
+			<CommentsForm
+				addComment={addComment}
+				toggleState={toggleState}
+			/>
 		</div>
 	);
 };

@@ -27,7 +27,7 @@ const Item: React.FC<ItemType> = ({
 				<span className={styles.badge}>{quantity}</span>
 				<button
 					className={`btn ${styles.btnDelete}`}
-					onClick={() => removeTask(id)}>
+					onClick={(e) => removeTask(e, id)}>
 					Delete
 				</button>
 			</div>
