@@ -1,33 +1,31 @@
 import { useEffect, useState } from 'react';
-import { ItemType } from '../../types/ItemType';
 import styles from './Item.module.css';
+import { ItemType } from '../../types/ItemType';
 
 const Item: React.FC<ItemType> = ({
-	task,
-	id,
+	item,
 	removeTask,
 	toggleActive,
-	toggleState,
-	comments,
+	activeItem,
 }) => {
-	const filterComments = comments.filter((item) => item.id === id);
+	const filterComments = item.comments.filter((item) => item.itemId);
 	const [quantity, setQuantity] = useState(filterComments.length);
 
 	useEffect(() => {
 		setQuantity(filterComments.length);
-	}, [comments, filterComments]);
+	}, [filterComments]);
 
 	return (
 		<li
-			key={id}
-			onClick={() => toggleActive(id)}
-			className={toggleState === id ? `${styles.item} ${styles.activeItem}` : styles.item}>
-			{task}
+			key={item.id}
+			onClick={() => toggleActive(item.id)}
+			className={activeItem === item.id ? `${styles.item} ${styles.activeItem}` : styles.item}>
+			{item.task}
 			<div className={styles.blockRight}>
 				<span className={styles.badge}>{quantity}</span>
 				<button
 					className={`btn ${styles.btnDelete}`}
-					onClick={(e) => removeTask(e, id)}>
+					onClick={(e) => removeTask(e, item.id)}>
 					Delete
 				</button>
 			</div>

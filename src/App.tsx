@@ -1,68 +1,65 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import Items from './components/Items/Items';
-import { NewItemType } from './types/NewItemType';
-import { CommentType } from './types/CommentType';
 import Comments from './components/Comments/Comments';
+import { TaskType } from './types/TaskType';
 
 const App: React.FC = () => {
 	const storedItems = localStorage.getItem('items');
 	const storedActiveItem = localStorage.getItem('activeItem');
-	const storedComments = localStorage.getItem('comments');
 
 	const initialItems = storedItems ? JSON.parse(storedItems) : [];
 	const initialActiveItem = storedActiveItem ? JSON.parse(storedActiveItem) : '';
-	const initialComments = storedComments ? JSON.parse(storedComments) : [];
 
-	const [todos, setTodos] = useState<NewItemType[]>(initialItems);
-	const [comments, setComments] = useState<CommentType[]>(initialComments);
-	const [toggleState, setToggleState] = useState<string>(initialActiveItem);
+	const [items, setItems] = useState<TaskType[]>(initialItems);
+	const [activeItem, setActiveItem] = useState<string>(initialActiveItem);
 
 	useEffect(() => {
-		localStorage.setItem('items', JSON.stringify(todos));
-		localStorage.setItem('activeItem', JSON.stringify(toggleState));
-		localStorage.setItem('comments', JSON.stringify(comments));
-		todos.length === 0 && setToggleState('');
-	}, [comments, todos, toggleState]);
+		localStorage.setItem('items', JSON.stringify(items));
+		localStorage.setItem('activeItem', JSON.stringify(activeItem));
+		items.length === 0 && setActiveItem('');
+	}, [items, activeItem]);
 
 	const addTask = (textInput: string) => {
 		if (textInput.trim() !== '') {
 			const newItem = {
 				id: Math.random().toString().substring(2, 10),
 				task: textInput,
+				comments: [],
 			};
-			setTodos([...todos, newItem]);
+			setItems([...items, newItem]);
 			toggleActive(newItem.id);
 		} else {
 			alert('Enter somethimg...');
 		}
 	};
+
 	const addComment = (textInput: string, colorInput: string) => {
-		if (textInput.trim() !== '') {
+		const activeItemIndex = items.findIndex((item) => item.id === activeItem);
+		if (textInput.trim() !== '' && activeItemIndex !== -1) {
 			const newComment = {
-				id: toggleState,
+				itemId: activeItem,
 				comment: textInput,
 				color: colorInput,
 			};
+			const updatedItems = [...items];
+			updatedItems[activeItemIndex].comments.push(newComment);
 
-			setComments([...comments, newComment]);
+			setItems(updatedItems);
 		} else {
 			alert('Enter somethimg...');
 		}
 	};
 
 	const toggleActive = (id: string) => {
-		setToggleState(id);
+		setActiveItem(id);
 	};
 
 	const removeTask = async (event: React.MouseEvent<HTMLButtonElement>, id: string) => {
 		event.stopPropagation();
-		const filterItem = todos.filter((item) => item.id !== id);
-		const filterComment = comments.filter((item) => item.id !== id);
-
-		setTodos(filterItem);
-		setComments(filterComment);
-		filterItem.length && setToggleState(filterItem[0].id);
+		const filterItem = items.filter((item) => item.id !== id);
+		setItems(filterItem);
+		filterItem.length && setActiveItem(filterItem[0].id);
 	};
 
 	return (
@@ -73,17 +70,16 @@ const App: React.FC = () => {
 			</aside>
 			<main className='main container'>
 				<Items
-					todos={todos}
+					items={items}
 					addTask={addTask}
 					removeTask={removeTask}
 					toggleActive={toggleActive}
-					toggleState={toggleState}
-					comments={comments}
+					activeItem={activeItem}
 				/>
 				<Comments
-					comments={comments}
+					items={items}
 					addComment={addComment}
-					toggleState={toggleState}
+					activeItem={activeItem}
 				/>
 			</main>
 		</div>

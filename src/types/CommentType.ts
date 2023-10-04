@@ -1,6 +1,6 @@
 export type CommentType = {
-	id: string;
+	itemId: string;
 	comment: string;
 	color: string;
-	toggleState?: string;
+	activeItem?: string;
 };

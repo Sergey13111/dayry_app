@@ -1,7 +1,7 @@
-import { CommentType } from './CommentType';
+import { TaskType } from './TaskType';
 
 export type CommentsType = {
-	comments: CommentType[];
+	items: TaskType[];
 	addComment: (textInput: string, colorInput: string) => void;
-	toggleState: string;
+	activeItem: string;
 };

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styles from './CommentsForm.module.css';
 import { CommentsFormType } from '../../types/CommentsFormType';
 
-const CommentsForm: React.FC<CommentsFormType> = ({ addComment, toggleState }) => {
+const CommentsForm: React.FC<CommentsFormType> = ({ addComment, activeItem }) => {
 	const [textInput, setTextInput] = useState<string>('');
 	const [colorInput, setColorInput] = useState<string>('');
 
@@ -40,7 +40,7 @@ const CommentsForm: React.FC<CommentsFormType> = ({ addComment, toggleState }) =
 			/>
 			<button
 				type='submit'
-				disabled={!toggleState}
+				disabled={!activeItem}
 				className={`btn ${styles.buttonAdd}`}>
 				Add New
 			</button>

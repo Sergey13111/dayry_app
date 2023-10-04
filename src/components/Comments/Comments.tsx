@@ -3,25 +3,27 @@ import CommentItem from '../CommentItem/CommentItems';
 import CommentsForm from '../CommentsForm/CommentsForm';
 import styles from './Comments.module.css';
 
-const Comments: React.FC<CommentsType> = ({ comments, addComment, toggleState }) => {
+const Comments: React.FC<CommentsType> = ({ items, addComment, activeItem }) => {
+	const activeItemFind = items.find((item) => item.id === activeItem);
+
 	return (
 		<div className={styles.itemsWrapper}>
-			<h1 className={styles.title}>Comments #{toggleState}</h1>
+			<h1 className={styles.title}>Comments #{activeItem}</h1>
 
 			<ul className={styles.listWrapper}>
-				{comments?.map(({ comment, id, color }, index) => (
+				{activeItemFind?.comments.map(({ comment, itemId, color }, index) => (
 					<CommentItem
 						key={index}
-						id={id}
+						itemId={itemId}
 						comment={comment}
 						color={color}
-						toggleState={toggleState}
+						activeItem={activeItem}
 					/>
 				))}
 			</ul>
 			<CommentsForm
 				addComment={addComment}
-				toggleState={toggleState}
+				activeItem={activeItem}
 			/>
 		</div>
 	);
