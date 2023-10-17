@@ -1,8 +1,28 @@
-import { useState } from 'react';
-import { FormType } from '../../types/FormType';
+import { useContext, useState } from 'react';
 import styles from './ItemsForm.module.css';
-const ItemsForm: React.FC<FormType> = ({ addTask }) => {
+import ItemsContex from '../../context/ItemsContext/ItemsContext';
+import ActiveItemContex from '../../context/ActiveItemContext/ActiveItemContext';
+
+const ItemsForm: React.FC = () => {
 	const [textInput, setTextInput] = useState<string>('');
+
+	const [items, setItems] = useContext(ItemsContex);
+	const [, setActiveItem] = useContext(ActiveItemContex);
+
+	const addTask = (textInput: string) => {
+		if (textInput.trim() !== '') {
+			const newItem = {
+				id: Math.random().toString().substring(2, 10),
+				task: textInput,
+				comments: [],
+			};
+			setItems([...items, newItem]);
+
+			setActiveItem(newItem.id);
+		} else {
+			alert('Enter somethimg...');
+		}
+	};
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setTextInput(event.currentTarget.value);

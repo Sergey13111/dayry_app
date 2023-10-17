@@ -1,9 +1,14 @@
-import { CommentsType } from '../../types/CommentsType';
+import { useContext } from 'react';
 import CommentItem from '../CommentItem/CommentItems';
 import CommentsForm from '../CommentsForm/CommentsForm';
 import styles from './Comments.module.css';
+import ActiveItemContex from '../../context/ActiveItemContext/ActiveItemContext';
+import ItemsContex from '../../context/ItemsContext/ItemsContext';
 
-const Comments: React.FC<CommentsType> = ({ items, addComment, activeItem }) => {
+const Comments: React.FC = () => {
+	const [items] = useContext(ItemsContex);
+	const [activeItem] = useContext(ActiveItemContex);
+
 	const activeItemFind = items.find((item) => item.id === activeItem);
 
 	return (
@@ -21,10 +26,7 @@ const Comments: React.FC<CommentsType> = ({ items, addComment, activeItem }) => 
 					/>
 				))}
 			</ul>
-			<CommentsForm
-				addComment={addComment}
-				activeItem={activeItem}
-			/>
+			<CommentsForm />
 		</div>
 	);
 };

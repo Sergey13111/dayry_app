@@ -1,10 +1,13 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import styles from './CommentsForm.module.css';
-import { CommentsFormType } from '../../types/CommentsFormType';
+import ItemsContext from '../../context/ItemsContext/ItemsContext';
+import ActiveItemContext from '../../context/ActiveItemContext/ActiveItemContext';
 
-const CommentsForm: React.FC<CommentsFormType> = ({ addComment, activeItem }) => {
+const CommentsForm: React.FC = () => {
 	const [textInput, setTextInput] = useState<string>('');
 	const [colorInput, setColorInput] = useState<string>('');
+	const [items, setItems] = useContext(ItemsContext);
+	const [activeItem] = useContext(ActiveItemContext);
 
 	const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
 		setTextInput(event.currentTarget.value);
@@ -12,6 +15,23 @@ const CommentsForm: React.FC<CommentsFormType> = ({ addComment, activeItem }) =>
 
 	const handleChangeColor = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setColorInput(event.currentTarget.value);
+	};
+
+	const addComment = (textInput: string, colorInput: string) => {
+		const activeItemIndex = items.findIndex((item) => item.id === activeItem);
+		if (textInput.trim() !== '' && activeItemIndex !== -1) {
+			const newComment = {
+				itemId: activeItem,
+				comment: textInput,
+				color: colorInput,
+			};
+			const updatedItems = [...items];
+			updatedItems[activeItemIndex].comments.push(newComment);
+
+			setItems(updatedItems);
+		} else {
+			alert('Enter somethimg...');
+		}
 	};
 
 	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {

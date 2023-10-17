@@ -4,11 +4,6 @@
 	padding: 0 15px;
 }
 
-.container {
-	margin: 0 auto;
-	padding: 0 15px;
-}
-
 .app-wrapper {
 	display: flex;
 	text-align: center;
@@ -37,8 +32,4 @@
 	line-height: 1.2;
 	color: #fff;
 	margin-bottom: 8px;
-}
-
-.main {
-	margin-top: 20px;
 }

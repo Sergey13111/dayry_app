@@ -1,27 +1,21 @@
-import { ItemsType } from '../../types/ItemsType';
+import { useContext } from 'react';
 import Item from '../Item/Item';
 import ItemsForm from '../ItemsForm/ItemsForm';
 import styles from './Items.module.css';
+import ItemsContex from '../../context/ItemsContext/ItemsContext';
 
-const Items: React.FC<ItemsType> = ({
-	items,
-	addTask,
-	removeTask,
-	toggleActive,
-	activeItem,
-}) => {
+const Items: React.FC = () => {
+	const [items] = useContext(ItemsContex);
+
 	return (
 		<div className={styles.itemsWrapper}>
 			<h1 className={styles.title}>Items</h1>
-			<ItemsForm addTask={addTask} />
+			<ItemsForm />
 			<ul className={styles.listWrapper}>
 				{items.map((item) => (
 					<Item
 						key={item.id}
 						item={item}
-						removeTask={removeTask}
-						toggleActive={toggleActive}
-						activeItem={activeItem}
 					/>
 				))}
 			</ul>
