@@ -1,8 +1,8 @@
 import { createContext } from 'react';
 import { ActiveItemContextStateType } from '../../types/ActiveItemContextStateType';
+import { getActiveItemFromLocalStorage } from '../../helpers/getActiveItemFromLocalStorage';
 
-const storedActiveItem = localStorage.getItem('activeItem');
-const initialActiveItem = storedActiveItem ? JSON.parse(storedActiveItem) : '';
+const initialActiveItem = getActiveItemFromLocalStorage();
 
 const ActiveItemContext = createContext<ActiveItemContextStateType>(initialActiveItem);
 

@@ -1,8 +1,8 @@
 import { createContext } from 'react';
 import { ItemsContextStateType } from '../../types/ItemsContextStateType';
+import { getItemsFromLocalStorage } from '../../helpers/getItemsFromLocalStorage';
 
-const storedItems = localStorage.getItem('items');
-const initialItems = storedItems ? JSON.parse(storedItems) : [];
+const initialItems = getItemsFromLocalStorage();
 const ItemsContext = createContext<ItemsContextStateType>(initialItems);
 
 export default ItemsContext;
