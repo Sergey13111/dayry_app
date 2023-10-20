@@ -11,7 +11,9 @@ const CommentItem: React.FC<CommentType> = ({ itemId, comment, color, activeItem
 			<div
 				style={{ backgroundColor: color || '#000' }}
 				className={styles.color}></div>
-			{comment}
+			<div className={styles.cont}>
+				<p className={styles.comment}>{comment}</p>
+			</div>
 		</li>
 	);
 };

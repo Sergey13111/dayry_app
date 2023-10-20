@@ -13,9 +13,23 @@
 	background-color: #f9f9f9;
 }
 
+.header {
+	display: none;
+	max-height: 80px;
+	height: 100%;
+	width: 100%;
+	background-color: #2b2f3e;
+	padding: 5px 10px;
+}
+
+.header h2 {
+	font-size: 1rem;
+	color: #fff;
+	margin-bottom: 5px;
+}
+
 .aside {
 	min-height: 100vh;
-	height: 100%;
 	max-width: 300px;
 	width: 100%;
 	background-color: #2b2f3e;
@@ -32,4 +46,18 @@
 	line-height: 1.2;
 	color: #fff;
 	margin-bottom: 8px;
+}
+
+@media screen and (max-width: 768px) {
+	.aside {
+		display: none;
+	}
+
+	.header {
+		display: block;
+	}
+
+	.container-fluid {
+		padding: 0;
+	}
 }

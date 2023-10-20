@@ -3,6 +3,7 @@ import styles from './Item.module.css';
 import { ItemType } from '../../types/ItemType';
 import ActiveItemContex from '../../context/ActiveItemContext/ActiveItemContext';
 import ItemsContex from '../../context/ItemsContext/ItemsContext';
+import { FaXmark } from 'react-icons/fa6';
 
 const Item: React.FC<ItemType> = ({ item }) => {
 	const [items, setItems] = useContext(ItemsContex);
@@ -31,7 +32,7 @@ const Item: React.FC<ItemType> = ({ item }) => {
 			key={item.id}
 			onClick={() => toggleActive(item.id)}
 			className={activeItem === item.id ? `${styles.item} ${styles.activeItem}` : styles.item}>
-			{item.task}
+			<span className={styles.task}>{item.task}</span>
 			<div className={styles.blockRight}>
 				<span className={styles.badge}>{quantity}</span>
 				<button
@@ -40,6 +41,11 @@ const Item: React.FC<ItemType> = ({ item }) => {
 					Delete
 				</button>
 			</div>
+			<button
+				className={`btn ${styles.btnMobileDelete}`}
+				onClick={(e) => removeTask(e, item.id)}>
+				<FaXmark />
+			</button>
 		</li>
 	);
 };

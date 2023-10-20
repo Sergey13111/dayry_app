@@ -45,19 +45,21 @@ const CommentsForm: React.FC = () => {
 		<form
 			onSubmit={handleSubmit}
 			className={styles.form}>
-			<input
-				type='color'
-				className={styles.InputColor}
-				value={colorInput}
-				onChange={handleChangeColor}
-			/>
-			<textarea
-				value={textInput}
-				onChange={handleChange}
-				placeholder='Type comment here...'
-				className={styles.textInput}
-				required
-			/>
+			<div className={styles.wrapperInput}>
+				<input
+					type='color'
+					className={styles.InputColor}
+					value={colorInput}
+					onChange={handleChangeColor}
+				/>
+				<textarea
+					value={textInput}
+					onChange={handleChange}
+					placeholder='Type comment here...'
+					className={styles.textInput}
+					required
+				/>
+			</div>
 			<button
 				type='submit'
 				disabled={!activeItem}

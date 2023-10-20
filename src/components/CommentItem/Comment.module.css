@@ -1,11 +1,24 @@
 .item {
 	display: flex;
+	max-width: 500px;
 	align-items: center;
 	margin-bottom: 10px;
 	padding: 12px 20px;
 	border-radius: 0.25rem;
 	border: 1px solid rgba(0, 0, 0, 0.125);
 	background-color: #fff;
+}
+
+.comment {
+	max-width: 100%;
+	overflow-wrap: break-word;
+	word-wrap: break-word;
+	white-space: pre-wrap;
+}
+
+.cont {
+	padding: 0 10px;
+	max-width: 370px;
 }
 
 .btnDelete {
@@ -31,4 +44,34 @@
 
 .noActive {
 	display: none;
+}
+
+@media screen and (max-width: 768px) {
+	.item {
+		padding: 10px 10px;
+	}
+
+	.comment {
+		max-width: 250px;
+		font-size: 14px;
+	}
+}
+
+@media screen and (max-width: 420px) {
+	.comment {
+		max-width: 230px;
+		font-size: 12px;
+	}
+
+	.color {
+		width: 35px;
+		height: 35px;
+		margin-right: 5px;
+	}
+}
+
+@media screen and (max-width: 400px) {
+	.comment {
+		max-width: 175px;
+	}
 }

@@ -5,6 +5,9 @@ import Main from './components/Main/Main';
 const App: React.FC = () => {
 	return (
 		<MasterProvider>
+			<header className='header'>
+				<h2>DAYRY APP</h2>
+			</header>
 			<div className='app-wrapper container-fluid'>
 				<aside className='aside'>
 					<h2>DAYRY APP</h2>

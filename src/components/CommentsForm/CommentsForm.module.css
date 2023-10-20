@@ -3,6 +3,11 @@
 	display: flex;
 }
 
+.wrapperInput {
+	display: flex;
+	width: 100%;
+}
+
 .textInput {
 	overflow: auto;
 	resize: vertical;
@@ -69,4 +74,19 @@ input[type='color'] {
 	width: 100px;
 	height: 60px;
 	max-width: 71px;
+}
+
+@media screen and (max-width: 768px) {
+	.form {
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+
+	.buttonAdd {
+		margin-top: 10px;
+	}
+
+	.textInput {
+		margin-right: 0;
+	}
 }
