@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/dayry_app/static/css/main.945248da.css",
+    "main.js": "/dayry_app/static/js/main.cd1bc157.js",
+    "index.html": "/dayry_app/index.html",
+    "main.945248da.css.map": "/dayry_app/static/css/main.945248da.css.map",
+    "main.cd1bc157.js.map": "/dayry_app/static/js/main.cd1bc157.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.945248da.css",
+    "static/js/main.cd1bc157.js"
+  ]
+}
