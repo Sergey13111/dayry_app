@@ -7,8 +7,6 @@
 Елементи можна видаляти
 Елементи при перезавантаженні сторінки повинні зберігатися
 
-Приклад робочого завдання https://earlold.github.io/react-test-dist/
-
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
