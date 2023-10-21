@@ -1,4 +1,4 @@
-# Demo version: [dayry_app](sergey13111.github.io/dayry_app/)
+# Demo version: [dayry_app](https://sergey13111.github.io/dayry_app/)
 Вимоги:
 Використовувати React
 Не використовувати сторонні бібліотеки для стилів
